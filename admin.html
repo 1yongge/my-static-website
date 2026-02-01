@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台 - 自由迪迪</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">自由迪迪</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog" class="nav-link">博客</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link active">管理后台</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 管理后台主要内容 -->
+    <main class="main-content admin-main">
+        <div class="container">
+            <div class="admin-dashboard">
+                <h1>管理后台</h1>
+                
+                <!-- 仪表板统计 -->
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3>文章总数</h3>
+                        <p class="stat-number">24</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>分类总数</h3>
+                        <p class="stat-number">5</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>访客数</h3>
+                        <p class="stat-number">1,245</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>评论数</h3>
+                        <p class="stat-number">87</p>
+                    </div>
+                </div>
+
+                <!-- 管理面板 -->
+                <div class="admin-panels">
+                    <!-- 写新文章 -->
+                    <div class="panel">
+                        <h2>写新文章</h2>
+                        <form class="post-form" id="newPostForm">
+                            <div class="form-group">
+                                <label for="postTitle">标题</label>
+                                <input type="text" id="postTitle" name="title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="postCategory">分类</label>
+                                <select id="postCategory" name="category" required>
+                                    <option value="">选择分类</option>
+                                    <option value="技术">技术</option>
+                                    <option value="生活">生活</option>
+                                    <option value="科技">科技</option>
+                                    <option value="学习">学习</option>
+                                    <option value="工具">工具</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="postContent">内容</label>
+                                <textarea id="postContent" name="content" rows="15" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="postImage">封面图片URL</label>
+                                <input type="text" id="postImage" name="image">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="postTags">标签（用逗号分隔）</label>
+                                <input type="text" id="postTags" name="tags" placeholder="tag1, tag2, tag3">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">保存草稿</button>
+                                <button type="submit" class="btn btn-success">发布文章</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- 文章管理 -->
+                    <div class="panel">
+                        <h2>文章管理</h2>
+                        <div class="table-responsive">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>标题</th>
+                                        <th>分类</th>
+                                        <th>状态</th>
+                                        <th>日期</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>如何开始使用GitHub进行协作开发</td>
+                                        <td>技术</td>
+                                        <td><span class="status published">已发布</span></td>
+                                        <td>2026-02-01</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>提高工作效率的小技巧</td>
+                                        <td>生活</td>
+                                        <td><span class="status published">已发布</span></td>
+                                        <td>2026-01-30</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>人工智能对未来的影响</td>
+                                        <td>科技</td>
+                                        <td><span class="status draft">草稿</span></td>
+                                        <td>2026-01-28</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-secondary">编辑</button>
+                                            <button class="btn btn-sm btn-danger">删除</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 自由迪迪. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何开始使用GitHub进行协作开发 - 自由迪迪</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">自由迪迪</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog" class="nav-link">博客</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/about" class="nav-link">关于</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link admin-btn">管理后台</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 文章详情主要内容 -->
+    <main class="main-content">
+        <div class="container">
+            <article class="post-detail">
+                <header class="post-header">
+                    <div class="post-meta-top">
+                        <span class="post-category">技术</span>
+                        <span class="post-date">2026-02-01</span>
+                    </div>
+                    <h1>如何开始使用GitHub进行协作开发</h1>
+                    <div class="post-meta-bottom">
+                        <span class="post-author">作者：管理员</span>
+                        <div class="post-share">
+                            <span>分享:</span>
+                            <a href="#" class="share-btn">微博</a>
+                            <a href="#" class="share-btn">微信</a>
+                            <a href="#" class="share-btn">QQ</a>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="post-image-large">
+                    <img src="https://via.placeholder.com/1200x600" alt="GitHub协作开发">
+                </div>
+
+                <div class="post-content">
+                    <p>GitHub是现代软件开发的重要工具，本文将介绍如何使用GitHub进行高效的团队协作。我们将从基础的版本控制概念开始，逐步深入到Pull Request、分支管理和项目协作的最佳实践。</p>
+
+                    <h2>什么是版本控制？</h2>
+                    <p>版本控制是一种记录一个或若干文件内容变化，以便将来查阅特定版本修订情况的系统。它可以帮助你恢复到文件以前的状态，甚至恢复整个项目到以前的状态。你可以比较文件的变化细节，查出最后是谁修改了哪个地方等等。</p>
+
+                    <h2>Git与GitHub的区别</h2>
+                    <p>Git是一个分布式版本控制系统，它可以在本地运行，不依赖于任何服务器。GitHub则是基于Git的一个在线代码托管平台，它提供了许多额外的功能，如项目管理、问题跟踪、代码审查等。</p>
+
+                    <h2>基本工作流程</h2>
+                    <p>在GitHub上进行协作开发的基本流程如下：</p>
+                    <ol>
+                        <li>Fork（派生）原始仓库到你的账户</li>
+                        <li>Clone（克隆）仓库到本地</li>
+                        <li>创建新分支进行开发</li>
+                        <li>提交变更</li>
+                        <li>Push（推送）变更到你的GitHub仓库</li>
+                        <li>创建Pull Request请求合并代码</li>
+                        <li>等待审查和合并</li>
+                    </ol>
+
+                    <h2>分支管理策略</h2>
+                    <p>良好的分支管理是协作开发的关键。通常我们会采用以下策略：</p>
+                    <ul>
+                        <li><strong>Main/Develop分支</strong>：Main分支用于生产环境，Develop分支用于集成</li>
+                        <li><strong>功能分支</strong>：每个新功能都在独立的分支上开发</li>
+                        <li><strong>修复分支</strong>：紧急修复在专门的分支上进行</li>
+                        <li><strong>发布分支</strong>：准备发布的版本</li>
+                    </ul>
+
+                    <h2>Pull Request最佳实践</h2>
+                    <p>提交Pull Request时，应该遵循以下最佳实践：</p>
+                    <ul>
+                        <li>确保你的代码已经过充分测试</li>
+                        <li>编写清晰的提交信息</li>
+                        <li>描述变更的目的和影响</li>
+                        <li>回应审阅者的评论</li>
+                        <li>保持PR规模适中</li>
+                    </ul>
+
+                    <h2>协作工具</h2>
+                    <p>GitHub提供了许多协作工具来帮助团队更好地工作：</p>
+                    <ul>
+                        <li><strong>Issues</strong>：用于跟踪任务、bug和功能请求</li>
+                        <li><strong>Projects</strong>：项目管理和任务跟踪</li>
+                        <li><strong>Wiki</strong>：项目文档</li>
+                        <li><strong>Discussions</strong>：社区讨论</li>
+                    </ul>
+
+                    <h2>总结</h2>
+                    <p>GitHub不仅是代码托管平台，更是现代软件开发协作的核心工具。通过合理使用GitHub的功能，团队可以实现高效、透明的协作开发。希望本文能帮助你更好地理解和使用GitHub进行协作开发。</p>
+                </div>
+
+                <footer class="post-footer">
+                    <div class="post-tags">
+                        <span>标签:</span>
+                        <a href="#" class="tag">GitHub</a>
+                        <a href="#" class="tag">Git</a>
+                        <a href="#" class="tag">协作开发</a>
+                        <a href="#" class="tag">版本控制</a>
+                    </div>
+                </footer>
+            </article>
+
+            <!-- 相关文章 -->
+            <section class="related-posts">
+                <h3>相关文章</h3>
+                <div class="posts-grid">
+                    <div class="post-card">
+                        <img src="https://via.placeholder.com/400x200" alt="文章图片" class="post-image">
+                        <div class="post-content">
+                            <span class="post-category">技术</span>
+                            <h3><a href="/post/2">提高工作效率的小技巧</a></h3>
+                            <p>在快节奏的生活中，如何提高工作效率成为了每个人都关心的话题...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="post-card">
+                        <img src="https://via.placeholder.com/400x200" alt="文章图片" class="post-image">
+                        <div class="post-content">
+                            <span class="post-category">技术</span>
+                            <h3><a href="/post/3">高效学习方法论</a></h3>
+                            <p>在信息爆炸的时代，如何高效地学习新知识成为了一项重要技能...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 自由迪迪. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
