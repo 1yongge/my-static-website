@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分类管理 - 自由迪迪管理后台</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-blog"></i> 自由迪迪</h3>
+        </div>
+        
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h4 id="welcomeUser">管理员</h4>
+                <small>admin@freedidi.com</small>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> 仪表板
+            </a>
+            <a href="posts.html" class="nav-item">
+                <i class="fas fa-file-alt"></i> 文章管理
+            </a>
+            <a href="categories.html" class="nav-item active">
+                <i class="fas fa-folder"></i> 分类管理
+            </a>
+            <a href="comments.html" class="nav-item">
+                <i class="fas fa-comments"></i> 评论管理
+            </a>
+            <a href="users.html" class="nav-item">
+                <i class="fas fa-users"></i> 用户管理
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i> 网站设置
+            </a>
+            <a href="javascript:void(0)" class="nav-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+            </a>
+        </nav>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="admin-main">
+        <!-- 顶部导航 -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>分类管理</h1>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-primary" id="addCategoryBtn">
+                    <i class="fas fa-plus"></i> 新建分类
+                </button>
+            </div>
+        </header>
+
+        <!-- 分类表格 -->
+        <div class="card">
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>名称</th>
+                            <th>描述</th>
+                            <th>文章数量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categoriesTableBody">
+                        <!-- 分类将通过JavaScript加载 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- 编辑分类模态框 -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="categoryModalTitle">新建分类</h3>
+                <span class="close" id="closeCategoryModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <div class="form-group">
+                        <label for="categoryName">分类名称</label>
+                        <input type="text" id="categoryName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryDescription">描述</label>
+                        <textarea id="categoryDescription" class="form-textarea" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="categorySlug">URL别名</label>
+                        <input type="text" id="categorySlug" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryColor">颜色</label>
+                        <input type="color" id="categoryColor" class="form-input" value="#3498db">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelCategory">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 检查登录状态
+        if(!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // 显示用户名
+        document.getElementById('welcomeUser').textContent = localStorage.getItem('username') || '管理员';
+
+        // 退出登录
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if(confirm('确定要退出登录吗？')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                window.location.href = 'login.html';
+            }
+        });
+
+        // 模拟分类数据
+        let categories = [
+            {
+                id: 1,
+                name: '技术',
+                description: '编程、开发、新技术探索',
+                slug: 'tech',
+                color: '#3498db',
+                postCount: 12
+            },
+            {
+                id: 2,
+                name: '生活',
+                description: '生活感悟、经验分享',
+                slug: 'life',
+                color: '#2ecc71',
+                postCount: 8
+            },
+            {
+                id: 3,
+                name: '科技',
+                description: '前沿科技、创新思考',
+                slug: 'science-tech',
+                color: '#9b59b6',
+                postCount: 6
+            },
+            {
+                id: 4,
+                name: '学习',
+                description: '知识分享、学习方法',
+                slug: 'learning',
+                color: '#f39c12',
+                postCount: 10
+            },
+            {
+                id: 5,
+                name: '工具',
+                description: '实用工具推荐、效率提升',
+                slug: 'tools',
+                color: '#e74c3c',
+                postCount: 5
+            }
+        ];
+
+        // 渲染分类表格
+        function renderCategories() {
+            const tbody = document.getElementById('categoriesTableBody');
+            tbody.innerHTML = '';
+
+            categories.forEach(category => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${category.id}</td>
+                    <td>
+                        <span class="category-badge" style="background-color: ${category.color};">
+                            ${category.name}
+                        </span>
+                    </td>
+                    <td>${category.description}</td>
+                    <td><span class="badge">${category.postCount} 篇</span></td>
+                    <td>
+                        <button class="btn btn-sm btn-outline edit-category-btn" data-id="${category.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline delete-category-btn" data-id="${category.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // 添加编辑和删除事件监听器
+            document.querySelectorAll('.edit-category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryId = parseInt(this.getAttribute('data-id'));
+                    openCategoryModal(categoryId);
+                });
+            });
+
+            document.querySelectorAll('.delete-category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const categoryId = parseInt(this.getAttribute('data-id'));
+                    deleteCategory(categoryId);
+                });
+            });
+        }
+
+        // 删除分类
+        function deleteCategory(categoryId) {
+            if(categories.some(cat => cat.id === categoryId && cat.postCount > 0)) {
+                if(!confirm('此分类包含文章，删除后这些文章将失去分类。确定要删除吗？')) {
+                    return;
+                }
+            } else if(!confirm('确定要删除这个分类吗？')) {
+                return;
+            }
+
+            categories = categories.filter(cat => cat.id !== categoryId);
+            renderCategories();
+        }
+
+        // 打开分类模态框
+        function openCategoryModal(categoryId = null) {
+            if(categoryId) {
+                // 编辑模式
+                const category = categories.find(c => c.id === categoryId);
+                if(category) {
+                    document.getElementById('categoryName').value = category.name;
+                    document.getElementById('categoryDescription').value = category.description;
+                    document.getElementById('categorySlug').value = category.slug;
+                    document.getElementById('categoryColor').value = category.color;
+                    
+                    document.getElementById('categoryForm').dataset.mode = 'edit';
+                    document.getElementById('categoryForm').dataset.categoryId = categoryId;
+                    document.getElementById('categoryModalTitle').textContent = '编辑分类';
+                }
+            } else {
+                // 新建模式
+                document.getElementById('categoryForm').reset();
+                document.getElementById('categoryColor').value = '#3498db'; // 默认颜色
+                
+                document.getElementById('categoryForm').dataset.mode = 'new';
+                document.getElementById('categoryModalTitle').textContent = '新建分类';
+            }
+            
+            document.getElementById('categoryModal').style.display = 'block';
+        }
+
+        // 保存分类
+        document.getElementById('categoryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const mode = this.dataset.mode;
+            const name = document.getElementById('categoryName').value;
+            const description = document.getElementById('categoryDescription').value;
+            const slug = document.getElementById('categorySlug').value || name.toLowerCase().replace(/\s+/g, '-');
+            const color = document.getElementById('categoryColor').value;
+            
+            if(mode === 'new') {
+                // 添加新分类
+                const newCategory = {
+                    id: Math.max(...categories.map(c => c.id), 0) + 1,
+                    name,
+                    description,
+                    slug,
+                    color,
+                    postCount: 0
+                };
+                categories.push(newCategory);
+            } else {
+                // 更新现有分类
+                const categoryId = parseInt(this.dataset.categoryId);
+                const categoryIndex = categories.findIndex(c => c.id === categoryId);
+                if(categoryIndex !== -1) {
+                    categories[categoryIndex].name = name;
+                    categories[categoryIndex].description = description;
+                    categories[categoryIndex].slug = slug;
+                    categories[categoryIndex].color = color;
+                }
+            }
+            
+            // 重新渲染表格
+            renderCategories();
+            
+            // 关闭模态框
+            document.getElementById('categoryModal').style.display = 'none';
+        });
+
+        // 关闭分类模态框
+        document.getElementById('closeCategoryModal').addEventListener('click', function() {
+            document.getElementById('categoryModal').style.display = 'none';
+        });
+
+        document.getElementById('cancelCategory').addEventListener('click', function() {
+            document.getElementById('categoryModal').style.display = 'none';
+        });
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('categoryModal');
+            if(e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // 添加新分类按钮
+        document.getElementById('addCategoryBtn').addEventListener('click', function() {
+            openCategoryModal();
+        });
+
+        // 初始化页面
+        renderCategories();
+
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.admin-sidebar').classList.toggle('collapsed');
+            document.querySelector('.admin-main').classList.toggle('sidebar-collapsed');
+        });
+    </script>
+</body>
+</html>

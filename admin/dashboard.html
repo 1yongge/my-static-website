@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仪表板 - 自由迪迪管理后台</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-blog"></i> 自由迪迪</h3>
+        </div>
+        
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h4 id="welcomeUser">管理员</h4>
+                <small>admin@freedidi.com</small>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fas fa-tachometer-alt"></i> 仪表板
+            </a>
+            <a href="posts.html" class="nav-item">
+                <i class="fas fa-file-alt"></i> 文章管理
+            </a>
+            <a href="categories.html" class="nav-item">
+                <i class="fas fa-folder"></i> 分类管理
+            </a>
+            <a href="comments.html" class="nav-item">
+                <i class="fas fa-comments"></i> 评论管理
+            </a>
+            <a href="users.html" class="nav-item">
+                <i class="fas fa-users"></i> 用户管理
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i> 网站设置
+            </a>
+            <a href="javascript:void(0)" class="nav-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+            </a>
+        </nav>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="admin-main">
+        <!-- 顶部导航 -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>仪表板</h1>
+            </div>
+            <div class="header-right">
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 统计卡片 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon bg-blue">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="postCount">0</h3>
+                    <p>文章总数</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-green">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="categoryCount">0</h3>
+                    <p>分类数量</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-orange">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="commentCount">0</h3>
+                    <p>评论数</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon bg-purple">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="userCount">0</h3>
+                    <p>用户数</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最近活动 -->
+        <div class="admin-grid">
+            <!-- 最近文章 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>最近文章</h3>
+                    <a href="posts.html">查看全部</a>
+                </div>
+                <div class="recent-posts" id="recentPosts">
+                    <!-- 文章将通过JavaScript加载 -->
+                </div>
+            </div>
+
+            <!-- 快速操作 -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>快速操作</h3>
+                </div>
+                <div class="quick-actions">
+                    <a href="posts.html?action=new" class="action-btn">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>新建文章</span>
+                    </a>
+                    <a href="categories.html" class="action-btn">
+                        <i class="fas fa-folder-plus"></i>
+                        <span>新建分类</span>
+                    </a>
+                    <a href="#" class="action-btn">
+                        <i class="fas fa-image"></i>
+                        <span>上传媒体</span>
+                    </a>
+                    <a href="settings.html" class="action-btn">
+                        <i class="fas fa-cog"></i>
+                        <span>网站设置</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 检查登录状态
+        if(!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // 显示用户名
+        document.getElementById('welcomeUser').textContent = localStorage.getItem('username') || '管理员';
+
+        // 退出登录
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if(confirm('确定要退出登录吗？')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                window.location.href = 'login.html';
+            }
+        });
+
+        // 模拟统计数据
+        document.getElementById('postCount').textContent = '24';
+        document.getElementById('categoryCount').textContent = '5';
+        document.getElementById('commentCount').textContent = '87';
+        document.getElementById('userCount').textContent = '1';
+
+        // 模拟最近文章数据
+        const recentPosts = [
+            {
+                id: 1,
+                title: 'GitHub协作开发完全指南',
+                date: '2026-02-01',
+                status: 'published'
+            },
+            {
+                id: 2,
+                title: '提升工作效率的10个实用技巧',
+                date: '2026-01-30',
+                status: 'draft'
+            },
+            {
+                id: 3,
+                title: '人工智能对未来生活的影响',
+                date: '2026-01-28',
+                status: 'published'
+            }
+        ];
+
+        const recentPostsContainer = document.getElementById('recentPosts');
+        recentPostsContainer.innerHTML = '';
+
+        recentPosts.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.className = 'post-item';
+            postElement.innerHTML = `
+                <div class="post-info">
+                    <h4>${post.title}</h4>
+                    <div class="post-meta">
+                        <span class="post-status status-${post.status}">${post.status === 'published' ? '已发布' : '草稿'}</span>
+                        <span class="post-date">${post.date}</span>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <a href="posts.html?action=edit&id=${post.id}" class="btn btn-sm btn-outline">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <button class="btn btn-sm btn-outline delete-post" data-id="${post.id}">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            recentPostsContainer.appendChild(postElement);
+        });
+
+        // 删除文章功能
+        document.querySelectorAll('.delete-post').forEach(button => {
+            button.addEventListener('click', function() {
+                const postId = this.getAttribute('data-id');
+                if(confirm('确定要删除这篇文章吗？')) {
+                    // 这里应该是实际的删除逻辑
+                    this.closest('.post-item').remove();
+                    // 更新计数
+                    document.getElementById('postCount').textContent = 
+                        parseInt(document.getElementById('postCount').textContent) - 1;
+                }
+            });
+        });
+
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.admin-sidebar').classList.toggle('collapsed');
+            document.querySelector('.admin-main').classList.toggle('sidebar-collapsed');
+        });
+    </script>
+</body>
+</html>

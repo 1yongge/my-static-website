@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章管理 - 自由迪迪管理后台</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-blog"></i> 自由迪迪</h3>
+        </div>
+        
+        <div class="sidebar-user">
+            <div class="user-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-info">
+                <h4 id="welcomeUser">管理员</h4>
+                <small>admin@freedidi.com</small>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-tachometer-alt"></i> 仪表板
+            </a>
+            <a href="posts.html" class="nav-item active">
+                <i class="fas fa-file-alt"></i> 文章管理
+            </a>
+            <a href="categories.html" class="nav-item">
+                <i class="fas fa-folder"></i> 分类管理
+            </a>
+            <a href="comments.html" class="nav-item">
+                <i class="fas fa-comments"></i> 评论管理
+            </a>
+            <a href="users.html" class="nav-item">
+                <i class="fas fa-users"></i> 用户管理
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i> 网站设置
+            </a>
+            <a href="javascript:void(0)" class="nav-item" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+            </a>
+        </nav>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="admin-main">
+        <!-- 顶部导航 -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>文章管理</h1>
+            </div>
+            <div class="header-right">
+                <a href="posts.html?action=new" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> 新建文章
+                </a>
+            </div>
+        </header>
+
+        <!-- 搜索和过滤 -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <input type="text" id="searchInput" class="form-input" placeholder="搜索文章...">
+                <select id="categoryFilter" class="form-select">
+                    <option value="">所有分类</option>
+                    <option value="技术">技术</option>
+                    <option value="生活">生活</option>
+                    <option value="科技">科技</option>
+                    <option value="学习">学习</option>
+                    <option value="工具">工具</option>
+                </select>
+                <select id="statusFilter" class="form-select">
+                    <option value="">所有状态</option>
+                    <option value="published">已发布</option>
+                    <option value="draft">草稿</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 文章表格 -->
+        <div class="card">
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>标题</th>
+                            <th>分类</th>
+                            <th>状态</th>
+                            <th>作者</th>
+                            <th>发布日期</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="postsTableBody">
+                        <!-- 文章将通过JavaScript加载 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination">
+            <button class="btn btn-outline" id="prevPage">上一页</button>
+            <span id="pageInfo">第 1 页，共 3 页</span>
+            <button class="btn btn-outline" id="nextPage">下一页</button>
+        </div>
+    </main>
+
+    <!-- 编辑文章模态框 -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">编辑文章</h3>
+                <span class="close" id="closeModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="postForm">
+                    <div class="form-group">
+                        <label for="postTitle">标题</label>
+                        <input type="text" id="postTitle" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postCategory">分类</label>
+                        <select id="postCategory" class="form-select" required>
+                            <option value="">选择分类</option>
+                            <option value="技术">技术</option>
+                            <option value="生活">生活</option>
+                            <option value="科技">科技</option>
+                            <option value="学习">学习</option>
+                            <option value="工具">工具</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postStatus">状态</label>
+                        <select id="postStatus" class="form-select" required>
+                            <option value="draft">草稿</option>
+                            <option value="published">已发布</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">内容</label>
+                        <textarea id="postContent" class="form-textarea" rows="15" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelEdit">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 检查登录状态
+        if(!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'login.html';
+        }
+
+        // 显示用户名
+        document.getElementById('welcomeUser').textContent = localStorage.getItem('username') || '管理员';
+
+        // 退出登录
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if(confirm('确定要退出登录吗？')) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                window.location.href = 'login.html';
+            }
+        });
+
+        // 模拟文章数据
+        let posts = [
+            {
+                id: 1,
+                title: 'GitHub协作开发完全指南',
+                category: '技术',
+                status: 'published',
+                author: 'admin',
+                date: '2026-02-01',
+                content: 'GitHub是现代软件开发的重要工具...'
+            },
+            {
+                id: 2,
+                title: '提升工作效率的10个实用技巧',
+                category: '生活',
+                status: 'draft',
+                author: 'admin',
+                date: '2026-01-30',
+                content: '在快节奏的现代生活中...'
+            },
+            {
+                id: 3,
+                title: '人工智能对未来生活的影响',
+                category: '科技',
+                status: 'published',
+                author: 'admin',
+                date: '2026-01-28',
+                content: 'AI技术快速发展...'
+            },
+            {
+                id: 4,
+                title: '高效学习方法论',
+                category: '学习',
+                status: 'published',
+                author: 'admin',
+                date: '2026-01-25',
+                content: '在信息爆炸的时代...'
+            },
+            {
+                id: 5,
+                title: '开发者必备工具推荐',
+                category: '工具',
+                status: 'draft',
+                author: 'admin',
+                date: '2026-01-20',
+                content: '介绍提升开发效率的各种工具...'
+            }
+        ];
+
+        // 渲染文章表格
+        function renderPosts(postsToShow = posts) {
+            const tbody = document.getElementById('postsTableBody');
+            tbody.innerHTML = '';
+
+            postsToShow.forEach(post => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${post.title}</td>
+                    <td><span class="badge">${post.category}</span></td>
+                    <td><span class="post-status status-${post.status}">${post.status === 'published' ? '已发布' : '草稿'}</span></td>
+                    <td>${post.author}</td>
+                    <td>${post.date}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline edit-btn" data-id="${post.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline delete-btn" data-id="${post.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // 添加编辑和删除事件监听器
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const postId = parseInt(this.getAttribute('data-id'));
+                    openEditModal(postId);
+                });
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const postId = parseInt(this.getAttribute('data-id'));
+                    deletePost(postId);
+                });
+            });
+        }
+
+        // 删除文章
+        function deletePost(postId) {
+            if(confirm('确定要删除这篇文章吗？')) {
+                posts = posts.filter(post => post.id !== postId);
+                renderPosts();
+            }
+        }
+
+        // 打开编辑模态框
+        function openEditModal(postId) {
+            const post = posts.find(p => p.id === postId);
+            if(post) {
+                document.getElementById('postTitle').value = post.title;
+                document.getElementById('postCategory').value = post.category;
+                document.getElementById('postStatus').value = post.status;
+                document.getElementById('postContent').value = post.content;
+                
+                // 设置表单为编辑模式
+                document.getElementById('postForm').dataset.mode = 'edit';
+                document.getElementById('postForm').dataset.postId = postId;
+                document.getElementById('modalTitle').textContent = '编辑文章';
+                
+                document.getElementById('editModal').style.display = 'block';
+            }
+        }
+
+        // 新建文章
+        function openNewModal() {
+            document.getElementById('postForm').reset();
+            document.getElementById('postForm').dataset.mode = 'new';
+            document.getElementById('modalTitle').textContent = '新建文章';
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        // 保存文章
+        document.getElementById('postForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const mode = this.dataset.mode;
+            const title = document.getElementById('postTitle').value;
+            const category = document.getElementById('postCategory').value;
+            const status = document.getElementById('postStatus').value;
+            const content = document.getElementById('postContent').value;
+            
+            if(mode === 'new') {
+                // 添加新文章
+                const newPost = {
+                    id: Math.max(...posts.map(p => p.id), 0) + 1,
+                    title,
+                    category,
+                    status,
+                    author: 'admin',
+                    date: new Date().toISOString().split('T')[0],
+                    content
+                };
+                posts.unshift(newPost);
+            } else {
+                // 更新现有文章
+                const postId = parseInt(this.dataset.postId);
+                const postIndex = posts.findIndex(p => p.id === postId);
+                if(postIndex !== -1) {
+                    posts[postIndex].title = title;
+                    posts[postIndex].category = category;
+                    posts[postIndex].status = status;
+                    posts[postIndex].content = content;
+                }
+            }
+            
+            // 重新渲染表格
+            renderPosts();
+            
+            // 关闭模态框
+            document.getElementById('editModal').style.display = 'none';
+        });
+
+        // 关闭模态框
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('editModal').style.display = 'none';
+        });
+
+        document.getElementById('cancelEdit').addEventListener('click', function() {
+            document.getElementById('editModal').style.display = 'none';
+        });
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('editModal');
+            if(e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filteredPosts = posts.filter(post => 
+                post.title.toLowerCase().includes(searchTerm) ||
+                post.content.toLowerCase().includes(searchTerm)
+            );
+            renderPosts(filteredPosts);
+        });
+
+        // 分类过滤
+        document.getElementById('categoryFilter').addEventListener('change', function() {
+            const category = this.value;
+            if(category) {
+                const filteredPosts = posts.filter(post => post.category === category);
+                renderPosts(filteredPosts);
+            } else {
+                renderPosts();
+            }
+        });
+
+        // 状态过滤
+        document.getElementById('statusFilter').addEventListener('change', function() {
+            const status = this.value;
+            if(status) {
+                const filteredPosts = posts.filter(post => post.status === status);
+                renderPosts(filteredPosts);
+            } else {
+                renderPosts();
+            }
+        });
+
+        // 分页功能
+        document.getElementById('prevPage').addEventListener('click', function() {
+            // 这里可以实现分页逻辑
+            alert('分页功能将在完整版本中实现');
+        });
+
+        document.getElementById('nextPage').addEventListener('click', function() {
+            // 这里可以实现分页逻辑
+            alert('分页功能将在完整版本中实现');
+        });
+
+        // 检查URL参数，如果是新建文章则打开模态框
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('action') === 'new') {
+            openNewModal();
+        }
+
+        // 初始化页面
+        renderPosts();
+
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.admin-sidebar').classList.toggle('collapsed');
+            document.querySelector('.admin-main').classList.toggle('sidebar-collapsed');
+        });
+    </script>
+</body>
+</html>
