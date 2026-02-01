@@ -4,104 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>分类 - 自由迪迪</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/blog.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/">自由迪迪</a>
+            <div class="nav-brand">
+                <a href="/">
+                    <i class="fas fa-blog"></i>
+                    <span>自由迪迪</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">首页</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/blog" class="nav-link">博客</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/categories" class="nav-link active">分类</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/about" class="nav-link">关于</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admin" class="nav-link admin-btn">管理后台</a>
-                </li>
-            </ul>
+            <div class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link">首页</a>
+                <a href="/blog" class="nav-link">博客</a>
+                <a href="/categories" class="nav-link active">分类</a>
+                <a href="/tags" class="nav-link">标签</a>
+                <a href="/about" class="nav-link">关于</a>
+                <a href="/admin" class="nav-link btn btn-outline">管理</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <!-- 分类页面主要内容 -->
-    <main class="main-content">
+    <!-- 分类页面 -->
+    <main class="blog-container">
         <div class="container">
-            <div class="categories-page">
+            <div class="blog-header">
                 <h1>文章分类</h1>
-                
-                <div class="categories-grid">
-                    <div class="category-card">
-                        <h3>技术</h3>
-                        <p>编程、开发工具、新技术探索</p>
-                        <div class="category-meta">
-                            <span>12篇文章</span>
-                            <a href="/category/tech" class="view-posts">查看文章</a>
-                        </div>
+                <p>按主题浏览您感兴趣的内容</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card-large">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                    
-                    <div class="category-card">
-                        <h3>生活</h3>
-                        <p>生活感悟、经验分享、日常记录</p>
-                        <div class="category-meta">
-                            <span>8篇文章</span>
-                            <a href="/category/life" class="view-posts">查看文章</a>
-                        </div>
-                    </div>
-                    
-                    <div class="category-card">
-                        <h3>科技</h3>
-                        <p>前沿科技、行业趋势、创新思考</p>
-                        <div class="category-meta">
-                            <span>6篇文章</span>
-                            <a href="/category/tech" class="view-posts">查看文章</a>
-                        </div>
-                    </div>
-                    
-                    <div class="category-card">
-                        <h3>学习</h3>
-                        <p>学习方法、知识整理、技能提升</p>
-                        <div class="category-meta">
-                            <span>10篇文章</span>
-                            <a href="/category/learning" class="view-posts">查看文章</a>
-                        </div>
-                    </div>
-                    
-                    <div class="category-card">
-                        <h3>工具</h3>
-                        <p>实用工具推荐、效率提升、资源分享</p>
-                        <div class="category-meta">
-                            <span>5篇文章</span>
-                            <a href="/category/tools" class="view-posts">查看文章</a>
+                    <div class="category-info">
+                        <h2>技术</h2>
+                        <p>编程、开发、新技术探索</p>
+                        <div class="category-stats">
+                            <span class="post-count">12篇文章</span>
+                            <a href="/category/tech" class="view-posts">查看文章 <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
                 
-                <section class="popular-tags">
-                    <h2>热门标签</h2>
-                    <div class="tags-cloud">
-                        <a href="/tag/github" class="tag">GitHub</a>
-                        <a href="/tag/git" class="tag">Git</a>
-                        <a href="/tag/ai" class="tag">人工智能</a>
-                        <a href="/tag/programming" class="tag">编程</a>
-                        <a href="/tag/productivity" class="tag">效率</a>
-                        <a href="/tag/web-dev" class="tag">前端开发</a>
-                        <a href="/tag/javascript" class="tag">JavaScript</a>
-                        <a href="/tag/python" class="tag">Python</a>
-                        <a href="/tag/react" class="tag">React</a>
-                        <a href="/tag/machine-learning" class="tag">机器学习</a>
+                <div class="category-card-large">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
                     </div>
-                </section>
+                    <div class="category-info">
+                        <h2>生活</h2>
+                        <p>生活感悟、经验分享</p>
+                        <div class="category-stats">
+                            <span class="post-count">8篇文章</span>
+                            <a href="/category/life" class="view-posts">查看文章 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category-card-large">
+                    <div class="category-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="category-info">
+                        <h2>科技</h2>
+                        <p>前沿科技、创新思考</p>
+                        <div class="category-stats">
+                            <span class="post-count">6篇文章</span>
+                            <a href="/category/scitech" class="view-posts">查看文章 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category-card-large">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="category-info">
+                        <h2>学习</h2>
+                        <p>知识分享、学习方法</p>
+                        <div class="category-stats">
+                            <span class="post-count">10篇文章</span>
+                            <a href="/category/learning" class="view-posts">查看文章 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category-card-large">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="category-info">
+                        <h2>工具</h2>
+                        <p>实用工具推荐、效率提升</p>
+                        <div class="category-stats">
+                            <span class="post-count">5篇文章</span>
+                            <a href="/category/tools" class="view-posts">查看文章 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category-card-large">
+                    <div class="category-icon">
+                        <i class="fas fa-design"></i>
+                    </div>
+                    <div class="category-info">
+                        <h2>设计</h2>
+                        <p>设计灵感、技巧分享</p>
+                        <div class="category-stats">
+                            <span class="post-count">7篇文章</span>
+                            <a href="/category/design" class="view-posts">查看文章 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -109,12 +133,37 @@
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>自由迪迪</h3>
+                    <p>分享知识与见解，记录成长点滴</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/blog">博客</a></li>
+                        <li><a href="/categories">分类</a></li>
+                        <li><a href="/about">关于</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系</h4>
+                    <p><i class="fas fa-envelope"></i> contact@freedidi.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 中国</p>
+                </div>
+            </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 自由迪迪. 保留所有权利.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

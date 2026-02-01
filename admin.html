@@ -4,93 +4,223 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>管理后台 - 自由迪迪</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/">自由迪迪</a>
+            <div class="nav-brand">
+                <a href="/">
+                    <i class="fas fa-blog"></i>
+                    <span>自由迪迪</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">首页</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/blog" class="nav-link">博客</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admin" class="nav-link active">管理后台</a>
-                </li>
-            </ul>
+            <div class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link">首页</a>
+                <a href="/blog" class="nav-link">博客</a>
+                <a href="/admin" class="nav-link active">管理</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <!-- 管理后台主要内容 -->
-    <main class="main-content admin-main">
-        <div class="container">
-            <div class="admin-dashboard">
-                <h1>管理后台</h1>
-                
-                <div class="setup-instructions">
-                    <div class="panel">
-                        <h2>Netlify CMS 配置完成</h2>
-                        <p>我们已成功配置 Netlify CMS 作为您的内容管理系统。现在您可以通过真实的后台管理系统来创建和编辑内容。</p>
-                        
-                        <h3>下一步设置：</h3>
-                        <ol>
-                            <li><strong>部署到 Netlify：</strong>将此网站部署到 Netlify 以启用 CMS 功能</li>
-                            <li><strong>启用身份验证：</strong>在 Netlify 中启用 Identity 服务</li>
-                            <li><strong>访问 CMS：</strong>通过 <code>/admin/</code> 路径访问真实的内容管理系统</li>
-                        </ol>
-                        
-                        <h3>直接访问真实管理后台：</h3>
-                        <p><a href="admin/" class="btn btn-primary">前往内容管理系统</a></p>
-                        
-                        <div class="note">
-                            <p><strong>注意：</strong>要使 CMS 完全工作，您需要：</p>
-                            <ul>
-                                <li>将网站部署到 Netlify 或支持 Git Gateway 的平台</li>
-                                <li>或使用 GitHub Pages + 第三方 Git Gateway 服务</li>
-                            </ul>
+    <!-- 管理后台 -->
+    <div class="admin-container">
+        <!-- 侧边栏 -->
+        <aside class="admin-sidebar">
+            <div class="sidebar-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>管理员</h4>
+                    <span>admin@freedidi.com</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active"><i class="fas fa-tachometer-alt"></i> 仪表板</a>
+                <a href="#" class="nav-item"><i class="fas fa-file-alt"></i> 文章管理</a>
+                <a href="#" class="nav-item"><i class="fas fa-folder"></i> 分类管理</a>
+                <a href="#" class="nav-item"><i class="fas fa-tags"></i> 标签管理</a>
+                <a href="#" class="nav-item"><i class="fas fa-users"></i> 用户管理</a>
+                <a href="#" class="nav-item"><i class="fas fa-comments"></i> 评论管理</a>
+                <a href="#" class="nav-item"><i class="fas fa-cog"></i> 网站设置</a>
+            </nav>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="admin-main">
+            <!-- 顶部导航 -->
+            <div class="admin-header">
+                <h1>仪表板</h1>
+                <div class="header-actions">
+                    <button class="btn btn-primary"><i class="fas fa-plus"></i> 新建文章</button>
+                </div>
+            </div>
+
+            <!-- 统计卡片 -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon bg-blue">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>24</h3>
+                        <p>文章总数</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-green">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>5</h3>
+                        <p>分类数量</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-orange">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>87</h3>
+                        <p>评论数</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-purple">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1,245</h3>
+                        <p>访问量</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最近活动 -->
+            <div class="admin-grid">
+                <!-- 最近文章 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>最近文章</h3>
+                        <a href="#">查看全部</a>
+                    </div>
+                    <div class="recent-posts">
+                        <div class="post-item">
+                            <div class="post-info">
+                                <h4>GitHub协作开发完全指南</h4>
+                                <div class="post-meta">
+                                    <span class="post-status status-published">已发布</span>
+                                    <span class="post-date">2026-02-01</span>
+                                </div>
+                            </div>
+                            <div class="post-actions">
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <div class="post-info">
+                                <h4>提升工作效率的10个实用技巧</h4>
+                                <div class="post-meta">
+                                    <span class="post-status status-draft">草稿</span>
+                                    <span class="post-date">2026-01-30</span>
+                                </div>
+                            </div>
+                            <div class="post-actions">
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                        <div class="post-item">
+                            <div class="post-info">
+                                <h4>人工智能对未来生活的影响</h4>
+                                <div class="post-meta">
+                                    <span class="post-status status-published">已发布</span>
+                                    <span class="post-date">2026-01-28</span>
+                                </div>
+                            </div>
+                            <div class="post-actions">
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline"><i class="fas fa-trash"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- 示例仪表板统计 -->
-                <div class="dashboard-stats">
-                    <div class="stat-card">
-                        <h3>文章总数</h3>
-                        <p class="stat-number">24</p>
+
+                <!-- 快速操作 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>快速操作</h3>
                     </div>
-                    <div class="stat-card">
-                        <h3>分类总数</h3>
-                        <p class="stat-number">5</p>
+                    <div class="quick-actions">
+                        <button class="action-btn">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>新建文章</span>
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-folder-plus"></i>
+                            <span>新建分类</span>
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-image"></i>
+                            <span>上传媒体</span>
+                        </button>
+                        <button class="action-btn">
+                            <i class="fas fa-cog"></i>
+                            <span>网站设置</span>
+                        </button>
                     </div>
-                    <div class="stat-card">
-                        <h3>访客数</h3>
-                        <p class="stat-number">1,245</p>
+                </div>
+
+                <!-- 内容编辑器 -->
+                <div class="card full-width">
+                    <div class="card-header">
+                        <h3>撰写新文章</h3>
                     </div>
-                    <div class="stat-card">
-                        <h3>评论数</h3>
-                        <p class="stat-number">87</p>
+                    <div class="editor-container">
+                        <form class="editor-form">
+                            <div class="form-group">
+                                <input type="text" placeholder="文章标题..." class="form-input">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <select class="form-select">
+                                        <option>选择分类</option>
+                                        <option>技术</option>
+                                        <option>生活</option>
+                                        <option>科技</option>
+                                        <option>学习</option>
+                                        <option>工具</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" placeholder="标签 (用逗号分隔)" class="form-input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="开始写作..." class="form-textarea" rows="15"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline">保存草稿</button>
+                                <button type="submit" class="btn btn-primary">发布文章</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
 
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2026 自由迪迪. 保留所有权利.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/main.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/admin.js"></script>
 </body>
 </html>

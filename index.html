@@ -3,120 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自由迪迪 - 分享知识与见解</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/blog.css">
+    <title>自由迪迪 - 发现、分享、创造</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="/">自由迪迪</a>
+            <div class="nav-brand">
+                <a href="/">
+                    <i class="fas fa-blog"></i>
+                    <span>自由迪迪</span>
+                </a>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">首页</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/blog" class="nav-link">博客</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/categories" class="nav-link">分类</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/about" class="nav-link">关于</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/admin" class="nav-link admin-btn">管理后台</a>
-                </li>
-            </ul>
+            <div class="nav-menu" id="nav-menu">
+                <a href="/" class="nav-link active">首页</a>
+                <a href="/blog" class="nav-link">博客</a>
+                <a href="/categories" class="nav-link">分类</a>
+                <a href="/tags" class="nav-link">标签</a>
+                <a href="/about" class="nav-link">关于</a>
+                <a href="/admin" class="nav-link btn btn-outline">管理</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <!-- 主要内容 -->
-    <main class="main-content">
-        <!-- 英雄区域 -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>自由迪迪 - 分享知识与见解</h1>
-                <p>探索技术、生活和一切有趣的事物</p>
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>发现、分享、创造</h1>
+            <p>在这里，我们探索技术、生活和创意的无限可能</p>
+            <div class="hero-buttons">
                 <a href="/blog" class="btn btn-primary">开始阅读</a>
+                <a href="/admin" class="btn btn-secondary">撰写文章</a>
             </div>
-        </section>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
 
-        <!-- 特色博客文章 -->
-        <section class="featured-posts">
-            <div class="container">
-                <h2>精选文章</h2>
-                <div class="posts-grid">
-                    <div class="post-card">
-                        <img src="https://via.placeholder.com/400x200" alt="文章图片" class="post-image">
-                        <div class="post-content">
-                            <span class="post-category">技术</span>
-                            <h3><a href="/post/1">如何开始使用GitHub进行协作开发</a></h3>
-                            <p>GitHub是现代软件开发的重要工具，本文将介绍如何使用GitHub进行高效的团队协作...</p>
-                            <div class="post-meta">
-                                <span class="post-date">2026-02-01</span>
-                                <span class="post-author">管理员</span>
-                            </div>
+    <!-- 特色内容 -->
+    <section class="featured">
+        <div class="container">
+            <h2 class="section-title">精选文章</h2>
+            <div class="articles-grid">
+                <article class="article-card featured-card">
+                    <div class="article-image">
+                        <img src="https://picsum.photos/600/400?random=1" alt="文章图片">
+                        <div class="article-category">技术</div>
+                    </div>
+                    <div class="article-content">
+                        <h3><a href="/post/github-collaboration">GitHub协作开发完全指南</a></h3>
+                        <p>深入探讨GitHub协作开发的最佳实践，从分支管理到代码审查的全流程指南。</p>
+                        <div class="article-meta">
+                            <span class="author">自由迪迪</span>
+                            <span class="date">2026-02-01</span>
+                            <span class="read-time">5分钟阅读</span>
                         </div>
                     </div>
-                    
-                    <div class="post-card">
-                        <img src="https://via.placeholder.com/400x200" alt="文章图片" class="post-image">
-                        <div class="post-content">
-                            <span class="post-category">生活</span>
-                            <h3><a href="/post/2">提高工作效率的小技巧</a></h3>
-                            <p>在快节奏的生活中，如何提高工作效率成为了每个人都关心的话题...</p>
-                            <div class="post-meta">
-                                <span class="post-date">2026-01-30</span>
-                                <span class="post-author">管理员</span>
-                            </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="https://picsum.photos/600/400?random=2" alt="文章图片">
+                        <div class="article-category">生活</div>
+                    </div>
+                    <div class="article-content">
+                        <h3><a href="/post/productivity-tips">提升工作效率的10个实用技巧</a></h3>
+                        <p>在快节奏的现代生活中，如何有效提升工作效率成为关键问题。</p>
+                        <div class="article-meta">
+                            <span class="author">自由迪迪</span>
+                            <span class="date">2026-01-30</span>
+                            <span class="read-time">4分钟阅读</span>
                         </div>
                     </div>
-                    
-                    <div class="post-card">
-                        <img src="https://via.placeholder.com/400x200" alt="文章图片" class="post-image">
-                        <div class="post-content">
-                            <span class="post-category">科技</span>
-                            <h3><a href="/post/3">人工智能对未来的影响</a></h3>
-                            <p>AI技术正在快速发展，它将如何改变我们的生活方式和工作模式...</p>
-                            <div class="post-meta">
-                                <span class="post-date">2026-01-28</span>
-                                <span class="post-author">管理员</span>
-                            </div>
+                </article>
+
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="https://picsum.photos/600/400?random=3" alt="文章图片">
+                        <div class="article-category">科技</div>
+                    </div>
+                    <div class="article-content">
+                        <h3><a href="/post/ai-impact">人工智能对未来生活的影响</a></h3>
+                        <p>AI技术快速发展，正在深刻改变我们的生活方式和工作模式。</p>
+                        <div class="article-meta">
+                            <span class="author">自由迪迪</span>
+                            <span class="date">2026-01-28</span>
+                            <span class="read-time">6分钟阅读</span>
                         </div>
                     </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 分类区域 -->
+    <section class="categories-section">
+        <div class="container">
+            <h2 class="section-title">热门分类</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>技术</h3>
+                    <p>编程、开发、新技术探索</p>
+                    <span class="post-count">12篇</span>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>生活</h3>
+                    <p>生活感悟、经验分享</p>
+                    <span class="post-count">8篇</span>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>科技</h3>
+                    <p>前沿科技、创新思考</p>
+                    <span class="post-count">6篇</span>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>学习</h3>
+                    <p>知识分享、学习方法</p>
+                    <span class="post-count">10篇</span>
                 </div>
             </div>
-        </section>
-
-        <!-- 分类展示 -->
-        <section class="categories">
-            <div class="container">
-                <h2>热门分类</h2>
-                <div class="categories-grid">
-                    <div class="category-card">
-                        <h3>技术</h3>
-                        <p>编程、开发工具、新技术探索</p>
-                    </div>
-                    <div class="category-card">
-                        <h3>生活</h3>
-                        <p>生活感悟、经验分享、日常记录</p>
-                    </div>
-                    <div class="category-card">
-                        <h3>科技</h3>
-                        <p>前沿科技、行业趋势、创新思考</p>
-                    </div>
-                    <div class="category-card">
-                        <h3>学习</h3>
-                        <p>学习方法、知识整理、技能提升</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- 页脚 -->
     <footer class="footer">
@@ -125,18 +155,25 @@
                 <div class="footer-section">
                     <h3>自由迪迪</h3>
                     <p>分享知识与见解，记录成长点滴</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                    </div>
                 </div>
                 <div class="footer-section">
-                    <h4>链接</h4>
+                    <h4>快速链接</h4>
                     <ul>
                         <li><a href="/">首页</a></li>
                         <li><a href="/blog">博客</a></li>
+                        <li><a href="/categories">分类</a></li>
                         <li><a href="/about">关于</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>联系</h4>
-                    <p>邮箱: contact@freedidi.com</p>
+                    <p><i class="fas fa-envelope"></i> contact@freedidi.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 中国</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -145,6 +182,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
