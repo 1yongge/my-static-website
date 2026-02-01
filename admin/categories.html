@@ -7,6 +7,98 @@
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: none;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: #e0e0e0;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <!-- 侧边栏 -->
@@ -141,7 +233,7 @@
         });
 
         // 模拟分类数据
-        let categories = [
+        let categories = JSON.parse(localStorage.getItem('categories')) || [
             {
                 id: 1,
                 name: '技术',
@@ -184,6 +276,11 @@
             }
         ];
 
+        // 保存分类到本地存储
+        function saveCategories() {
+            localStorage.setItem('categories', JSON.stringify(categories));
+        }
+
         // 渲染分类表格
         function renderCategories() {
             const tbody = document.getElementById('categoriesTableBody');
@@ -212,25 +309,35 @@
                 tbody.appendChild(row);
             });
 
-            // 添加编辑和删除事件监听器
+            // 重新绑定事件监听器
+            addEventListeners();
+        }
+
+        // 添加事件监听器
+        function addEventListeners() {
+            // 编辑按钮事件
             document.querySelectorAll('.edit-category-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.onclick = function() {
                     const categoryId = parseInt(this.getAttribute('data-id'));
                     openCategoryModal(categoryId);
-                });
+                };
             });
 
+            // 删除按钮事件
             document.querySelectorAll('.delete-category-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.onclick = function() {
                     const categoryId = parseInt(this.getAttribute('data-id'));
                     deleteCategory(categoryId);
-                });
+                };
             });
         }
 
         // 删除分类
         function deleteCategory(categoryId) {
-            if(categories.some(cat => cat.id === categoryId && cat.postCount > 0)) {
+            const category = categories.find(cat => cat.id === categoryId);
+            if(!category) return;
+
+            if(category.postCount > 0) {
                 if(!confirm('此分类包含文章，删除后这些文章将失去分类。确定要删除吗？')) {
                     return;
                 }
@@ -239,6 +346,7 @@
             }
 
             categories = categories.filter(cat => cat.id !== categoryId);
+            saveCategories();
             renderCategories();
         }
 
@@ -270,7 +378,7 @@
         }
 
         // 保存分类
-        document.getElementById('categoryForm').addEventListener('submit', function(e) {
+        document.getElementById('categoryForm').onsubmit = function(e) {
             e.preventDefault();
             
             const mode = this.dataset.mode;
@@ -302,43 +410,43 @@
                 }
             }
             
-            // 重新渲染表格
+            saveCategories();
             renderCategories();
             
             // 关闭模态框
             document.getElementById('categoryModal').style.display = 'none';
-        });
+        };
 
         // 关闭分类模态框
-        document.getElementById('closeCategoryModal').addEventListener('click', function() {
+        document.getElementById('closeCategoryModal').onclick = function() {
             document.getElementById('categoryModal').style.display = 'none';
-        });
+        };
 
-        document.getElementById('cancelCategory').addEventListener('click', function() {
+        document.getElementById('cancelCategory').onclick = function() {
             document.getElementById('categoryModal').style.display = 'none';
-        });
+        };
 
         // 点击模态框外部关闭
-        window.addEventListener('click', function(e) {
+        window.onclick = function(e) {
             const modal = document.getElementById('categoryModal');
             if(e.target === modal) {
                 modal.style.display = 'none';
             }
-        });
+        };
 
         // 添加新分类按钮
-        document.getElementById('addCategoryBtn').addEventListener('click', function() {
+        document.getElementById('addCategoryBtn').onclick = function() {
             openCategoryModal();
-        });
+        };
 
         // 初始化页面
         renderCategories();
 
         // 移动端菜单切换
-        document.getElementById('menuToggle').addEventListener('click', function() {
+        document.getElementById('menuToggle').onclick = function() {
             document.querySelector('.admin-sidebar').classList.toggle('collapsed');
             document.querySelector('.admin-main').classList.toggle('sidebar-collapsed');
-        });
+        };
     </script>
 </body>
 </html>
