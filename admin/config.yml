@@ -1,0 +1,49 @@
+backend:
+  name: git-gateway
+  branch: main
+
+site_url: https://1yongge.github.io/my-static-website
+display_url: https://1yongge.github.io/my-static-website
+logo_url: https://1yongge.github.io/my-static-website/images/logo.png
+publish_mode: editorial_workflow
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "博客文章"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD"}
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "分类", name: "categories", widget: "string"}
+      - {label: "标签", name: "tags", widget: "list"}
+      - {label: "摘要", name: "excerpt", widget: "string"}
+      - {label: "正文", name: "body", widget: "markdown"}
+      - {label: "发布状态", name: "published", widget: "boolean", default: true}
+
+  - name: "pages"
+    label: "页面"
+    folder: "pages"
+    create: true
+    fields:
+      - {label: "路径", name: "path", widget: "string"}
+      - {label: "标题", name: "title", widget: "string"}
+      - {label: "正文", name: "body", widget: "markdown"}
+
+  - name: "config"
+    label: "网站配置"
+    name: "config"
+    editor:
+      preview: false
+    files:
+      - label: "网站设置"
+        name: "settings"
+        file: "config/settings.json"
+        fields:
+          - {label: "网站标题", name: "title", widget: "string"}
+          - {label: "网站描述", name: "description", widget: "string"}
+          - {label: "关键词", name: "keywords", widget: "list"}
